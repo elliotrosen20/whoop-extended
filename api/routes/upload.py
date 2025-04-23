@@ -16,8 +16,13 @@ def allowed_file(filename):
 
 
 
-@upload_bp.route('', methods=['POST'])
+@upload_bp.route('/upload', methods=['POST'])
 def upload_file():
+  print("UPLOAD endpoint hit with method:", request.method)
+  if request.method == 'OPTIONS':
+        # This is just the preflight; return 200 with appropriate headers
+        return '', 200
+
   if 'file' not in request.files:
     return jsonify({'error': 'No file part'}), 400
   
@@ -42,8 +47,3 @@ def upload_file():
     }), 200
   
   return jsonify({'error': 'File type not allowed'}), 400
-
-
-
-
-

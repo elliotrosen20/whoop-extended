@@ -1,10 +1,13 @@
 import { useState } from 'react'
+// import { useNavigate } from 'react-router-dom';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function Upload() {
   const [file, setFile] = useState<File | null>(null)
+  // const navigate = useNavigate();
+  // const [isUploaded, setIsUploaded] = useState<boolean>(false)
 
   const handleSubmit = async () => {
     try {
@@ -21,15 +24,24 @@ function Upload() {
         body: fd
       })
 
+      const text = await response.text();
+
+      if (!text) {
+        throw new Error('Server returned an empty response');
+      }
+
+      let data;
+      try {
+        data = JSON.parse(text);
+      } catch (parseError) {
+        console.error('JSON parse error:', parseError);
+        throw new Error('Invalid response format from server');
+      }
+
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.error || 'Upload failed');
       }
-      
-      const data = await response.json() as {
-        file_id: string;
-        message: string;
-      };
 
       if (!data.file_id) {
         throw new Error('Server response missing file ID')
@@ -37,6 +49,9 @@ function Upload() {
 
       localStorage.setItem('fileId', data.file_id);
       toast.success('File uploaded successfully!');
+
+      // navigate('/dashboard');
+
     } catch (error) {
       console.error('Upload error:', error)
 
@@ -54,6 +69,10 @@ function Upload() {
     const selectedFile = e.target.files?.[0] || null
     setFile(selectedFile);
   }
+
+  // const handleGenerate = () => {
+
+  // }
 
   return (
     <div>
