@@ -85,15 +85,23 @@ function Upload() {
     await new Promise(resolve => setTimeout(resolve, 5000));
     
     try {
-      // const response = await fetch(`/api/generate/${fileId}`, {
-      //   method: "POST"
-      // });
+      const response = await fetch(`/api/analyze/model/${fileId}`, {
+        method: "POST"
+      });
+
+      const res = await response.json();
+
+      if (res.status == 'error') {
+        throw new Error(res.error)
+      }
 
       // process response
 
-      // localStorage.setItem('insightsReady', 'true');
+      localStorage.setItem('insightsReady', 'true');
       navigate('/dashboard');
     } catch (error) {
+      toast.error('Error generating insights');
+      handleNewUpload();
       console.error('Error:',error);
     } finally {
       setIsGenerating(false);
