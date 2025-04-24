@@ -57,4 +57,12 @@ def train_model(file_id):
 
     return xgb_model
 
+def train_model(df_clean):
+    # df_clean, test_df_clean = train_test_split(df_clean, test_size=0.2, random_state=42)
+    
+    X, y = model_prep(df_clean)
+    xgb_model = train_xgboost_kfold_early_stop(X, y)
+
+    return xgb_model
+
 
