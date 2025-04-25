@@ -77,7 +77,7 @@ def get_equivalence_insights(file_id):
     }), 404
   except Exception as e:
     return jsonify({
-      'error': str(e)
+      'error': str(e),
       'status': 'error'
     }), 500
 
@@ -94,6 +94,6 @@ def get_factors(file_id):
     }), 404
   except Exception as e:
     return jsonify({
-      'error': str(e)
+      'error': str(e),
       'status': 'error'
     }), 500
