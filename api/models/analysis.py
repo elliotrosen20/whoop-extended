@@ -95,15 +95,33 @@ def calculate_eq_insights(insights):
     equivalence_insights = []
     for i, feature1 in enumerate(TOP_FEATURES):
         for j, feature2 in enumerate(TOP_FEATURES[i + 1:]):
-            feature1_impact = float(insights[i]['impact'])
-            feature2_impact = float(insights[j]['impact'])
+            insight1, insight2 = insights[i], insights[j]
+            feature1_impact = float(insight1['impact'])
+            feature2_impact = float(insight2['impact'])
+
+            feature1_name = insight1['feature']
+            feature2_name = insight2['feature']
+
+            feature1_units = insight1['units']
+            feature2_units = insight2['units']
+
+            feature1_change = float(insight1['change_amount'])
+            feature2_change = float(insight2['change_amount'])
+
             if feature2_impact != 0:
                 ratio = float(feature1_impact / feature2_impact)
+                eq_amount = abs(feature2_change * ratio)
+
+                direction_word = "increasing" if (feature1_impact * feature2_impact) > 0 else "decreasing"
+                description = f"Increasing {feature1_name} by {feature1_change:.2f} {feature1_units} is equivalent to {direction_word} {feature2_name} by {eq_amount:.2f} {feature2_units}"
+
                 equivalence_insights.append({
-                    'feature1': feature1,
-                    'feature2': feature2,
+                    'feature1': feature1_name,
+                    'feature2': feature2_name,
+                    'feature1_units':  feature1_units,
+                    'feature2_units':  feature2_units,
                     'ratio': ratio,
-                    'description': f"Improving {feature1} by {feature1_impact:.2f} is equivalent to improving {feature2} by {(feature2_impact * ratio):.2f}"
+                    'description': description
                 })
     return equivalence_insights
 
