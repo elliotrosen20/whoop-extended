@@ -5,7 +5,6 @@ import './App.css'
 function App() {
   return (
     <>
-      {/* <Upload /> */}
       <h1>Hello app</h1>
       <nav>
         <ul>

@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { ClipLoader } from 'react-spinners';
 
@@ -12,6 +12,11 @@ function Upload() {
   const [fileId, setFileId] = useState<string | null>(null);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  //when navigating back to this component from dashboard on reset? 
+  // useEffect(() => {
+  //   handleNewUpload();
+  // }, [])
 
   const handleSubmit = async () => {
     try {

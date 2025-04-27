@@ -5,7 +5,7 @@ import numpy as np
 from sklearn.model_selection import KFold, train_test_split
 import os
 
-from api.models.preprocess import model_prep, preprocess_data
+from .preprocess import model_prep, preprocess_data
 
 def train_xgboost_kfold_early_stop(X, y, n_splits=5, RANDOM_STATE=42):
     kf = KFold(n_splits=n_splits, shuffle=True, random_state=RANDOM_STATE)
@@ -14,19 +14,34 @@ def train_xgboost_kfold_early_stop(X, y, n_splits=5, RANDOM_STATE=42):
     for fold, (train_index, val_index) in enumerate(kf.split(X)):
         X_train_fold, X_val_fold = X.iloc[train_index], X.iloc[val_index]
         y_train_fold, y_val_fold = y.iloc[train_index], y.iloc[val_index]
+        # model = xgb.XGBRegressor(
+        #     n_estimators=1000,
+        #     learning_rate=0.025,
+        #     max_depth=4,
+        #     subsample=0.9,
+        #     colsample_bytree=0.9,
+        #     random_state=RANDOM_STATE
+        # )
+        # model.fit(
+        #     X_train_fold,
+        #     y_train_fold,
+        #     eval_set=[(X_val_fold, y_val_fold)],
+        #     early_stopping_rounds=25,
+        #     verbose=False
+        # )
         model = xgb.XGBRegressor(
             n_estimators=1000,
             learning_rate=0.025,
             max_depth=4,
             subsample=0.9,
             colsample_bytree=0.9,
-            random_state=RANDOM_STATE
+            random_state=RANDOM_STATE,
+            early_stopping_rounds=25,
         )
         model.fit(
             X_train_fold,
             y_train_fold,
             eval_set=[(X_val_fold, y_val_fold)],
-            early_stopping_rounds=25,
             verbose=False
         )
         preds = model.predict(X_val_fold)

@@ -1,4 +1,5 @@
 import App from './App'
+import Dashboard from './pages/Dashboard';
 import Upload from './pages/Upload'
 
 const routes = [
@@ -9,6 +10,10 @@ const routes = [
   {
     path: "upload",
     element: <Upload />
+  },
+  {
+    path: "dashboard",
+    element: <Dashboard />
   }
 ];
 

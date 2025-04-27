@@ -1,19 +1,30 @@
 import { useEffect, useState } from "react";
 
 import { ClipLoader } from 'react-spinners';
+import { useNavigate } from 'react-router-dom';
+
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ShapModule from "../components/ShapModule";
+import InsightsModule from "../components/InsightsModule";
+import EqInsightsModule from "../components/EqInsightsModule";
+
 
 function Dashboard() {
   // need to add types
-  const [insights, setInsights] = useState(null);
-  const [eqInsights, setEqInsights] = useState(null);
-  const [factors, setFactors] = useState(null);
+  const navigate = useNavigate();
+
+  const [insights, setInsights] = useState([]);
+  const [eqInsights, setEqInsights] = useState([]);
+  const [shapData, setShapData] = useState([]);
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [hasError, setHasError] = useState<boolean>(false);
 
   const fileId = localStorage.getItem('fileId');
+
+  let hasAnyError = false;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -21,26 +32,51 @@ function Dashboard() {
         const routes = [
           `/api/analyze/insights/${fileId}`,
           `/api/analyze/eqInsights/${fileId}`,
-          `/api/analyze/factors/${fileId}`
+          `/api/analyze/shap/${fileId}`
         ]
+
+        setHasError(false);
+
         const responses = await Promise.all(
           routes.map(route => fetch(route, { method: "GET" }))
         );
+        
+        try {
+          const insightsData = await responses[0].json();
+          setInsights(insightsData || []);
+        } catch (err) {
+          console.error("Error parsing insights", err);
+          setInsights([]);
+          // setHasError(true);
+          hasAnyError = true;
+        }
 
-        const dataArr = await Promise.all(
-          responses.map(response => response.json())
-        );
+        try {
+          const eqInsightsData = await responses[1].json();
+          setEqInsights(eqInsightsData || []);
+        } catch (err) {
+          console.error("Error parsing eqInsights:", err)
+          setEqInsights([]);
+          // setHasError(true);
+          hasAnyError = true;
+        }
 
-        dataArr.forEach(data => {
-          if (data.status == 'error') {
-            throw new Error(data.error);
-          }
-        });
+        try {
+          const shapData = await responses[2].json();
+          setShapData(shapData || []);
+        } catch (err) {
+          console.error("Error parsing shapData:", err);
+          setShapData([]);
+          // setHasError(true);
+          hasAnyError = true;
+        }
 
-        setInsights(dataArr[0]);
-        setEqInsights(dataArr[1]);
-        setFactors(dataArr[2]);
+
+        if (hasAnyError) {
+          setHasError(true);
+        }
       } catch (error) {
+        setHasError(true)
         toast.error('Error fetching data')
         console.error('Error:', error);
       } finally {
@@ -49,7 +85,14 @@ function Dashboard() {
     }
     
     fetchData();
-  }, [fileId])
+  }, [])
+
+  const handleReset = async () => {
+    // add logic for prompt for "are you sure"
+    setIsLoading(true);
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    navigate('/upload');
+  }
 
   if (isLoading){
     return (
@@ -66,8 +109,27 @@ function Dashboard() {
     )
   }
 
+  if (hasError){
+    return (
+      <div>Error fetching insights</div>
+    )
+  }
+
   return (
     <div>
+      <h1>Dashboard</h1>
+      <button
+        className=''
+        onClick={handleReset}
+      >
+        Analyze new file
+      </button>
+      <hr />
+      <ShapModule shapData={shapData}/>
+      <hr />
+      <InsightsModule insights={insights}/>
+      <hr />
+      <EqInsightsModule eqInsights={eqInsights}/>
 
       <ToastContainer 
         position="top-right"

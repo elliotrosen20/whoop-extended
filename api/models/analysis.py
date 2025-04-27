@@ -5,8 +5,9 @@ from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 import numpy as np
 import pandas as pd
 import shap
+import re
 
-from api.models.preprocess import model_prep, preprocess_data
+from .preprocess import model_prep, preprocess_data
 
 UPLOAD_FOLDER = 'uploads'
 
@@ -42,42 +43,62 @@ def eval_model(model, X_test, y_test):
     print(f"Test MAE: {test_mae:.4f}")
     print(f"Test R2: {test_r2:.4f}")
 
-TOP_FEATURES = []
+TOP_FEATURES = ['Heart rate variability (ms)', 'Resting heart rate (bpm)', 'In bed duration (min)', 'Asleep duration (min)', 'REM duration (min)'];
+
 
 def calculate_insights(model, df_clean):
-    TOP_FEATURES = []
-    baseline_data = df_clean[TOP_FEATURES].mean().to_dict()
-    baseline_prediction = model.predict([list(baseline_data.values())])[0]
+    print(df_clean.shape)
+    print(df_clean.columns.tolist())
+    print(model.feature_names_in_)
 
-    insights = {}
+    X, _ = model_prep(df_clean)
+
+    baseline_data = X.mean().to_dict()
+
+    baseline_values = [baseline_data[col] for col in X.columns]
+    baseline_prediction = float(model.predict([baseline_values])[0])
+
+    insights = []
 
     for feature in TOP_FEATURES:
-        std_dev = df_clean[feature].std()
-        change_amount = std_dev * 0.5
+        match = re.match(r'(.*)\s*\((.*)\)$', feature)
+        if match:
+            feature_name = match.group(1).lower()
+            units = match.group(2)
+        else:
+            feature_name = feature.lower()
+            units = "units"
+        
+        std_dev = X[feature].std()
+        change_amount = float(std_dev * 0.5)
 
         modified_data = baseline_data.copy()
         modified_data[feature] += change_amount
 
-        modified_prediction = model.predict([list(modified_data.values())])[0]
+        modified_values = [modified_data[col] for col in X.columns]
+        modified_prediction = float(model.predict([modified_values])[0])
 
         impact = modified_prediction - baseline_prediction
 
-        insights[feature] = ({
+        insights.append({
+            'feature': feature_name,
+            'original_feature': feature,
+            'units': units,
             'change_amount': change_amount,
             'impact': impact,
-            'description': f"Increasing {feature} by {change_amount:.2f} improves recovery by {impact:.2f} points"
-        })
+            'description': f"Increasing {feature_name} by {change_amount:.2f} {units} {'improves' if impact > 0 else 'hurts'} recovery by {abs(impact):.2f} points"
+        });
     
     return insights
 
 def calculate_eq_insights(insights):
     equivalence_insights = []
     for i, feature1 in enumerate(TOP_FEATURES):
-        for feature2 in TOP_FEATURES[i + 1:]:
-            feature1_impact = insights[feature1]['impact']
-            feature2_impact = insights[feature2]['impact']
+        for j, feature2 in enumerate(TOP_FEATURES[i + 1:]):
+            feature1_impact = float(insights[i]['impact'])
+            feature2_impact = float(insights[j]['impact'])
             if feature2_impact != 0:
-                ratio = feature1_impact / feature2_impact
+                ratio = float(feature1_impact / feature2_impact)
                 equivalence_insights.append({
                     'feature1': feature1,
                     'feature2': feature2,

@@ -2,7 +2,7 @@ import datetime
 import os
 from flask import Blueprint, jsonify
 import pandas as pd
-from api.models.analysis import calculate_eq_insights, calculate_insights, calculate_shap_values
+from models.analysis import calculate_eq_insights, calculate_insights, calculate_shap_values
 from models.preprocess import preprocess_data, model_prep
 from models.xgb_model import train_model, train_xgboost_kfold_early_stop
 
@@ -82,8 +82,8 @@ def get_equivalence_insights(file_id):
     }), 500
 
 
-@analyze_bp.route('/analyze/factors/<file_id>', methods=['GET'])
-def get_factors(file_id):
+@analyze_bp.route('/analyze/shap/<file_id>', methods=['GET'])
+def get_shap(file_id):
   try:
     shap_values = cache[file_id]['shap_values']
     return jsonify(shap_values)
