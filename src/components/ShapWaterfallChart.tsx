@@ -17,7 +17,7 @@ function ShapWaterfallChart ({
   shapData
 }: ShapWaterfallChartProps) {
   return (
-    <div className="bg-white p-4 rounded-lg shadow">
+    <div className="bg-white p-4 rounded-lg shadow text-center">
       <h3 className="text-lg font-medium mb-4">SHAP Feature Impact</h3>
       <ResponsiveContainer width="100%" height={shapData.length * 50}>
         <BarChart 
@@ -34,7 +34,6 @@ function ShapWaterfallChart ({
             interval={0}
           />
           <Tooltip />
-          <Legend />
           <ReferenceLine x={0} stroke="#000" />
           <Bar 
             dataKey="mean_shap_value" 

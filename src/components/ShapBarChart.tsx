@@ -1,4 +1,4 @@
-import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 
 interface ShapDetail {
   feature: string;
@@ -25,7 +25,6 @@ function ShapBarChart ({
           <XAxis type="number" />
           <YAxis type="category" dataKey="name" width={150} />
           <Tooltip />
-          <Legend />
           <Bar dataKey="importance" fill="#8884d8" name="Feature Importance" />
         </BarChart>
       </ResponsiveContainer>

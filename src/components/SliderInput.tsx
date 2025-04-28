@@ -36,7 +36,11 @@ function SliderInput({
     // </div>
     <div className="mb-4">
       <label className="flex items-center">
-        <span className="w-1/3 min-w-[180px]">{label}:</span>
+        <span 
+          className="w-1/3 min-w-[180px] font-semibold text-gray-700"
+        >
+          {label}:
+        </span>
         <input 
           type="range" 
           name={name} 
@@ -47,7 +51,7 @@ function SliderInput({
           onChange={onChange} 
           className="flex-1 mx-3"
         />
-        <span className="w-12 text-right">{value}</span>
+        <span className="w-12 text-center font-bold border border-gray-400 rounded-md py-1">{value}</span>
       </label>
     </div>
   )

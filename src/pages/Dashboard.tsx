@@ -23,6 +23,7 @@ function Dashboard() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [hasError, setHasError] = useState<boolean>(false);
 
+
   const fileId = localStorage.getItem('fileId');
 
   let hasAnyError = false;
@@ -118,13 +119,15 @@ function Dashboard() {
 
   return (
     <div className="">
-      <h1>Dashboard</h1>
-      <button
-        className='mb-4 mt-4'
-        onClick={handleReset}
-      >
-        Analyze new file
-      </button>
+      <div className="mb-6">
+        <h1 className="text-4xl font-bold text-gray-800 text-center">Dashboard</h1>
+        <button
+          onClick={handleReset}
+          className="mt-4"
+        >
+          Analyze New File
+        </button>
+      </div>
       <div className="mb-4">
         <PredictionModule />
       </div>
