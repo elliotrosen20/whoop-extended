@@ -155,10 +155,14 @@ function Dashboard() {
       <div className="w-[80vw]">
         {activeTab === 'insights' ? (
           <div>
-            <div className="mb-4">
+            
+            <h2 className="text-2xl font-semibold text-gray-800 mb-6 text-center">Recovery Insights</h2>
+            <div className="mb-4 bg-black">
               <InsightsModule insights={insights}/>
             </div>
-            <div className="mb-4">
+
+            <h2 className="text-2xl font-semibold text-gray-800 mb-6 text-center">Equivalence Factors</h2>
+            <div className="mb-4 bg-black">
               <EqInsightsModule eqInsights={eqInsights}/>
             </div>
           </div>

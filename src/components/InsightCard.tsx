@@ -44,7 +44,7 @@ function InsightCard ({
   //   </div>
   // )
   return (
-    <div className="bg-white rounded-lg shadow-md p-6 transition-all duration-300 hover:shadow-xl">
+    <div className="bg-white shadow-md p-6 transition-all duration-300 hover:shadow-xl">
       <div className="flex justify-between items-start mb-4">
         <h3 className="text-xl font-semibold text-gray-800">{feature}</h3>
         <div className={`flex items-center ${isPositive ? 'text-green-600' : 'text-red-600'}`}>
