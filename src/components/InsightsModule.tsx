@@ -31,7 +31,7 @@ function InsightsModule ({
 
   return (
     // <div className="w-full mx-auto px-6 py-8 bg-white rounded-lg shadow-lg">
-    <div className="max-w-[80%] mx-auto">
+    <div className="max-w-[87%] mx-auto">
       <Slider {...settings}>
         {insights.map(insight => {
           return (

@@ -29,7 +29,7 @@ function EqInsightsModule ({
   };
 
   return (
-    <div className="max-w-[80%] mx-auto">
+    <div className="max-w-[87%] mx-auto">
       <Slider {...settings}>
         {eqInsights.map(eqInsight  => {
           return (

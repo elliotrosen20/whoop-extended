@@ -161,7 +161,7 @@ function Dashboard() {
               <InsightsModule insights={insights}/>
             </div>
 
-            <h2 className="text-2xl font-semibold text-gray-800 mb-6 text-center">Equivalence Factors</h2>
+            <h2 className="text-2xl font-semibold text-gray-800 mb-6 text-center mt-20">Equivalence Factors</h2>
             <div className="mb-4 bg-black">
               <EqInsightsModule eqInsights={eqInsights}/>
             </div>
