@@ -39,25 +39,25 @@ function ShapModule({
         >
           Waterfall
         </button>
-        <button
+        {/* <button
           onClick={() => setActiveTab('force')}
           className={activeTab === 'force' ? 'active' : ''}
         >
           Force
-        </button>
+        </button> */}
       </div>
-      <ShapWaterfallChart shapData={shapData} />
-      <ShapBarChart shapData={shapData} />
-      {/* <div>
+      {/* <ShapWaterfallChart shapData={shapData} />
+      <ShapBarChart shapData={shapData} /> */}
+      <div>
         {activeTab === 'bar' ? (
           <ShapBarChart shapData={shapData} />
         ) : (
           activeTab === 'waterfall' ? (
           <ShapWaterfallChart shapData={shapData} />
         ) : (
-          <ShapForceChart shapData={shapData} />
+          <div></div>
         ))}
-      </div> */}
+      </div>
     </div>
   )
 }
