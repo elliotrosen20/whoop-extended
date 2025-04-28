@@ -159,3 +159,66 @@ def calculate_shap_values(model, df_clean):
     shap_data.sort(key=lambda x: x['importance'], reverse=True)
 
     return shap_data
+
+def final_prediction(model, data):
+    try:
+        rhr = data.get('rhr')
+        hrv = data.get('hrv')
+        temp = data.get('temp')
+        spo2 = data.get('spo2')
+        resp = data.get('resp')
+        asleep = data.get('asleep')
+        in_bed = data.get('in_bed')
+        light = data.get('light')
+        deep = data.get('deep')
+        rem = data.get('rem')
+        awake = data.get('awake')
+        sleep_need = data.get('sleep_need')
+        sleep_debt = data.get('sleep_debt')
+
+        sleep_efficiency = (asleep / in_bed) * 100 if in_bed else 0
+        sleep_performance = ((sleep_need - sleep_debt) / sleep_need) * 100 if sleep_need else 0
+        light_ratio = light / asleep if asleep else 0
+        deep_ratio = deep / asleep if asleep else 0
+        rem_ratio = rem / asleep if asleep else 0
+
+        input_data = {
+            "Resting heart rate (bpm)": rhr,
+            "Heart rate variability (ms)": hrv,
+            "Skin temp (celsius)": temp,
+            "Blood oxygen %": spo2,
+            "Respiratory rate (rpm)": resp,
+            "Asleep duration (min)": asleep,
+            "In bed duration (min)": in_bed,
+            "Light sleep duration (min)": light,
+            "Deep (SWS) duration (min)": deep,
+            "REM duration (min)": rem,
+            "Awake duration (min)": awake,
+            "Sleep need (min)": sleep_need,
+            "Sleep debt (min)": sleep_debt,
+            "Sleep efficiency %": sleep_efficiency,
+            "Sleep performance %": sleep_performance,
+            "Light sleep ratio": light_ratio,
+            "Deep sleep ratio": deep_ratio,
+            "REM sleep ratio": rem_ratio
+        }
+
+        expected_features = [
+          'Resting heart rate (bpm)', 'Heart rate variability (ms)',
+          'Skin temp (celsius)', 'Blood oxygen %', 'Sleep performance %',
+          'Respiratory rate (rpm)', 'Asleep duration (min)',
+          'In bed duration (min)', 'Light sleep duration (min)',
+          'Deep (SWS) duration (min)', 'REM duration (min)',
+          'Awake duration (min)', 'Sleep need (min)', 'Sleep debt (min)',
+          'Sleep efficiency %', 'Deep sleep ratio', 'REM sleep ratio',
+          'Light sleep ratio'
+        ]
+
+        df = pd.DataFrame([input_data])
+        df = df[expected_features]
+
+        pred = model.predict(df)[0]
+        return round(float(pred), 2)
+    except Exception as e:
+        print(f"Error in final_prediction: {str(e)}")
+        raise Exception(f"Error making prediction: {str(e)}")

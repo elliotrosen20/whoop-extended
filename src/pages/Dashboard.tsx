@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import ShapModule from "../components/ShapModule";
 import InsightsModule from "../components/InsightsModule";
 import EqInsightsModule from "../components/EqInsightsModule";
+import PredictionModule from "../components/PredictionModule";
 
 
 function Dashboard() {
@@ -116,7 +117,7 @@ function Dashboard() {
   }
 
   return (
-    <div>
+    <div className="">
       <h1>Dashboard</h1>
       <button
         className='mb-4 mt-4'
@@ -124,6 +125,9 @@ function Dashboard() {
       >
         Analyze new file
       </button>
+      <div className="mb-4">
+        <PredictionModule />
+      </div>
       <div className="mb-4">
         <InsightsModule insights={insights}/>
       </div>

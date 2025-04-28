@@ -1,8 +1,8 @@
 import datetime
 import os
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 import pandas as pd
-from models.analysis import calculate_eq_insights, calculate_insights, calculate_shap_values
+from models.analysis import calculate_eq_insights, calculate_insights, calculate_shap_values, final_prediction
 from models.preprocess import preprocess_data, model_prep
 from models.xgb_model import train_model, train_xgboost_kfold_early_stop
 
@@ -95,5 +95,91 @@ def get_shap(file_id):
   except Exception as e:
     return jsonify({
       'error': str(e),
+      'status': 'error'
+    }), 500
+  
+# @analyze_bp.route('/analyze/predict/<file_id>', methods=['POST'])
+# def get_prediction(file_id):
+#   try:
+#     data = request.json
+
+#     required_fields = ["rhr", "hrv", "temp", "spo2", "resp", "asleep", 
+#                         "in_bed", "light", "deep", "rem", "awake", 
+#                         "sleep_need", "sleep_debt"]
+    
+#     missing_fields = [field for field in required_fields if field not in data]
+#     if missing_fields:
+#       return jsonify({
+#         "error": f"Missing required fields: {', '.join(missing_fields)}"
+#       }), 400
+#   except Exception as e:
+#     return jsonify({
+#       'error': f"Error during prediction: {str(e)}",
+#       'status': 'error'
+#     }), 500
+
+#   try:
+#     model = cache[file_id]['model']
+#   except KeyError:
+#     return jsonify({
+#       'error': 'Prediction model not found for the given file ID',
+#       'status': 'error'
+#     }), 404
+#   except Exception as e:
+#     return jsonify({
+#       'error': str(e),
+#       'status': 'error'
+#     }), 500
+  
+#   res = final_prediction(model, data)
+#   return jsonify({
+#     'prediction': res,
+#   })
+
+@analyze_bp.route('/analyze/predict/<file_id>', methods=['POST'])
+def get_prediction(file_id):
+  try:
+    data = request.json
+    if not data:
+      return jsonify({
+        'error': 'No JSON data received',
+        'status': 'error'
+      }), 400
+
+    required_fields = ["rhr", "hrv", "temp", "spo2", "resp", "asleep", 
+                      "in_bed", "light", "deep", "rem", "awake", 
+                      "sleep_need", "sleep_debt"]
+    
+    missing_fields = [field for field in required_fields if field not in data]
+    if missing_fields:
+      return jsonify({
+        "error": f"Missing required fields: {', '.join(missing_fields)}"
+      }), 400
+      
+    try:
+      model = cache[file_id]['model']
+    except KeyError:
+      return jsonify({
+        'error': 'Prediction model not found for the given file ID',
+        'status': 'error'
+      }), 404
+    
+    # Add a try/except for the final_prediction call
+    try:
+      res = final_prediction(model, data)
+      return jsonify({
+        'prediction': res,
+      })
+    except Exception as pred_error:
+      print(f"Error in final_prediction: {str(pred_error)}")
+      return jsonify({
+        'error': f"Error making prediction: {str(pred_error)}",
+        'status': 'error'
+      }), 500
+      
+  except Exception as e:
+    print(f"Unexpected error in prediction route: {str(e)}")
+    return jsonify({
+      'error': f"Error during prediction: {str(e)}",
       'status': 'error'
     }), 500
