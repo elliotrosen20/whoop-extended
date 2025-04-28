@@ -142,47 +142,45 @@ function PredictionModule () {
   //   </div>
   // )
   return (
-    <div className="w-full px-4 sm:px-6 lg:px-8 bg-gray-100">
-      <div className="max-w-4xl mx-auto py-8">
-        <h1 className="text-3xl font-bold text-gray-800 mb-4 text-center">Recovery Score Predictor</h1>
-        <p className="text-gray-600 text-center mb-8">Adjust the sliders to simulate different biometric states and estimate recovery score.</p>
-  
-        <form onSubmit={handleSubmit}>
-          {sliderConfigs.map((config) => (
-            <SliderInput
-              key={config.name}
-              name={config.name}
-              label={config.label}
-              min={config.min}
-              max={config.max}
-              step={config.step || 1}
-              value={inputs[config.name]}
-              onChange={handleInputChange}
-            />
-          ))}
-  
-          <div className="flex justify-center mt-6">
-            <button 
-              type="submit" 
-              disabled={loading}
-              className="border-5 font-semibold"
-            >
-              {loading ? 'Predicting...' : 'Predict Recovery Score'}
-            </button>
+    <div className="w-full mx-auto px-4 sm:px-6 lg:px-8 bg-gray-100 py-8">
+      <h1 className="text-3xl font-bold text-gray-800 mb-4 text-center">Recovery Score Predictor</h1>
+      <p className="text-gray-600 text-center mb-8">Adjust the sliders to simulate different biometric states and estimate recovery score.</p>
+
+      <form onSubmit={handleSubmit}>
+        {sliderConfigs.map((config) => (
+          <SliderInput
+            key={config.name}
+            name={config.name}
+            label={config.label}
+            min={config.min}
+            max={config.max}
+            step={config.step || 1}
+            value={inputs[config.name]}
+            onChange={handleInputChange}
+          />
+        ))}
+
+        <div className="flex justify-center mt-6">
+          <button 
+            type="submit" 
+            disabled={loading}
+            className="border-5 font-semibold"
+          >
+            {loading ? 'Predicting...' : 'Predict Recovery Score'}
+          </button>
+        </div>
+      </form>
+
+      {prediction !== null && (
+        <div className="mt-8 text-center p-8 bg-white rounded-lg shadow-md">
+          <h2 className="text-2xl font-semibold text-gray-700 mb-4">
+            Predicted WHOOP Recovery Score
+          </h2>
+          <div className="text-6xl font-bold text-green-600">
+            {prediction}
           </div>
-        </form>
-  
-        {prediction !== null && (
-          <div className="mt-8 text-center p-8 bg-white rounded-lg shadow-md">
-            <h2 className="text-2xl font-semibold text-gray-700 mb-4">
-              Predicted WHOOP Recovery Score
-            </h2>
-            <div className="text-6xl font-bold text-green-600">
-              {prediction}
-            </div>
-          </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   )
 

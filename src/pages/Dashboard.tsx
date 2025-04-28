@@ -22,7 +22,7 @@ function Dashboard() {
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [hasError, setHasError] = useState<boolean>(false);
-
+  const [activeTab, setActiveTab] = useState<string>('insights');
 
   const fileId = localStorage.getItem('fileId');
 
@@ -118,7 +118,7 @@ function Dashboard() {
   }
 
   return (
-    <div className="">
+    <div className="w-full px-4 sm:px-6 lg:px-8 max-w-full mx-auto">
       <div className="mb-6">
         <h1 className="text-4xl font-bold text-gray-800 text-center">Dashboard</h1>
         <button
@@ -128,16 +128,47 @@ function Dashboard() {
           Analyze New File
         </button>
       </div>
-      <div className="mb-4">
+
+
+      <div className="flex justify-center space-x-4 mb-6">
+        <button
+          onClick={() => setActiveTab('insights')}
+          className={activeTab === 'insights' ? 'active' : ''}
+        >
+          Insights
+        </button>
+        <button
+          onClick={() => setActiveTab('feature_analysis')}
+          className={activeTab === 'feature_analysis' ? 'active' : ''}
+        >
+          Feature Analysis
+        </button>
+        <button
+          onClick={() => setActiveTab('simulate')}
+          className={activeTab === 'simulate' ? 'active' : ''}
+        >
+          Simulate
+        </button>
+      </div>
+
+      <ShapModule shapData={shapData} />
+
+      {/* {activeTab === 'insights' ? (
+        <div>
+          <div className="mb-4">
+            <InsightsModule insights={insights}/>
+          </div>
+          <div className="mb-4">
+            <EqInsightsModule eqInsights={eqInsights}/>
+          </div>
+        </div>
+      ) : activeTab === 'feature_analysis' ? (
+        <div className="mb-4">
+          <ShapModule shapData={shapData}/>
+        </div>
+      ) : (
         <PredictionModule />
-      </div>
-      <div className="mb-4">
-        <InsightsModule insights={insights}/>
-      </div>
-      <div className="mb-4">
-        <EqInsightsModule eqInsights={eqInsights}/>
-      </div>
-      <ShapModule shapData={shapData}/>
+      )} */}
 
       <ToastContainer 
         position="top-right"

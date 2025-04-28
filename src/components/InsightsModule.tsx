@@ -27,10 +27,13 @@ function InsightsModule ({
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: true,
+    nextArrow: <div className="custom-arrow right-0" />,
+    prevArrow: <div className="custom-arrow left-0" />
   };
 
   return (
-    <div>
+    <div className="w-full mx-auto px-6 py-8 bg-white rounded-lg shadow-lg">
+      <h2 className="text-2xl font-semibold text-gray-800 mb-6 text-center">Insights</h2>
       <Slider {...settings}>
         {insights.map(insight => {
           return (
