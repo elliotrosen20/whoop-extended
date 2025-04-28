@@ -118,7 +118,8 @@ function Dashboard() {
   }
 
   return (
-    <div className="w-full px-4 sm:px-6 lg:px-8 max-w-full mx-auto">
+    // <div className="w-full px-4 sm:px-6 lg:px-8 max-w-full mx-auto">
+    <div className="">
       <div className="mb-6">
         <h1 className="text-4xl font-bold text-gray-800 text-center">Dashboard</h1>
         <button

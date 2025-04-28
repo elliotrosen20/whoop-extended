@@ -51,7 +51,8 @@ function ShapModule({
     //     ))}
     //   </div>
     // </div>
-    <div className="w-full max-w-7xl mx-auto px-6 py-8 bg-gray-100 rounded-lg shadow-lg">
+    <div className="">
+    {/* <div className="w-full max-w-7xl mx-auto px-6 py-8 bg-gray-100 rounded-lg shadow-lg"> */}
       <h1 className="text-3xl font-bold text-gray-800 mb-4 text-center">Model Insights</h1>
       
       <div className="flex justify-center space-x-4 mb-6">
