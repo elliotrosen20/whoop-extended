@@ -93,8 +93,8 @@ def calculate_insights(model, df_clean):
 
 def calculate_eq_insights(insights):
     equivalence_insights = []
-    for i, feature1 in enumerate(TOP_FEATURES):
-        for j, feature2 in enumerate(TOP_FEATURES[i + 1:]):
+    for i in range(len(TOP_FEATURES)):
+        for j in range(i + 1, len(TOP_FEATURES)):
             insight1, insight2 = insights[i], insights[j]
             feature1_impact = float(insight1['impact'])
             feature2_impact = float(insight2['impact'])
@@ -139,11 +139,21 @@ def calculate_shap_values(model, df_clean):
     shap_data = []
 
     for i, feature in enumerate(feature_names):
+        match = re.match(r'(.*)\s*\((.*)\)$', feature)
+        if match:
+            feature_name = match.group(1).lower()
+            units = match.group(2)
+        else:
+            feature_name = feature.lower()
+            units = "units"
+
         shap_data.append({
             'feature': feature,
+            'name': feature_name,
+            'units': units,
             'importance': float(feature_importances[i]),
             # 'shap_values': shap_values[:, i].tolist()
-            'mean_shap_value':float(np.abs(shap_values[:, i]).mean())
+            'mean_shap_value':float(shap_values[:, i].mean())
         })
     
     shap_data.sort(key=lambda x: x['importance'], reverse=True)

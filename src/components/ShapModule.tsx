@@ -1,7 +1,10 @@
 import { useState } from "react";
+import ShapWaterfallChart from "./ShapWaterfallChart";
 
 interface ShapDetail {
   feature: string;
+  name: string;
+  units: string;
   importance: number;
   mean_shap_value: number;
 }
@@ -42,6 +45,7 @@ function ShapModule({
           Force
         </button>
       </div>
+      <ShapWaterfallChart shapData={shapData} />
       {/* <div>
         {activeTab === 'bar' ? (
           <ShapBarChart shapData={shapData} />
