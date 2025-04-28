@@ -119,17 +119,18 @@ function Dashboard() {
     <div>
       <h1>Dashboard</h1>
       <button
-        className=''
+        className='mb-4 mt-4'
         onClick={handleReset}
       >
         Analyze new file
       </button>
-      <hr />
+      <div className="mb-4">
+        <InsightsModule insights={insights}/>
+      </div>
+      <div className="mb-4">
+        <EqInsightsModule eqInsights={eqInsights}/>
+      </div>
       <ShapModule shapData={shapData}/>
-      <hr />
-      <InsightsModule insights={insights}/>
-      <hr />
-      <EqInsightsModule eqInsights={eqInsights}/>
 
       <ToastContainer 
         position="top-right"
