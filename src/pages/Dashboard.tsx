@@ -152,9 +152,7 @@ function Dashboard() {
         </button>
       </div>
 
-      <ShapModule shapData={shapData} />
-
-      {/* {activeTab === 'insights' ? (
+      {activeTab === 'insights' ? (
         <div>
           <div className="mb-4">
             <InsightsModule insights={insights}/>
@@ -169,7 +167,7 @@ function Dashboard() {
         </div>
       ) : (
         <PredictionModule />
-      )} */}
+      )}
 
       <ToastContainer 
         position="top-right"
