@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ShapWaterfallChart from "./ShapWaterfallChart";
+import ShapBarChart from "./ShapBarChart";
 
 interface ShapDetail {
   feature: string;
@@ -46,6 +47,7 @@ function ShapModule({
         </button>
       </div>
       <ShapWaterfallChart shapData={shapData} />
+      <ShapBarChart shapData={shapData} />
       {/* <div>
         {activeTab === 'bar' ? (
           <ShapBarChart shapData={shapData} />
