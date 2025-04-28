@@ -152,22 +152,24 @@ function Dashboard() {
         </button>
       </div>
 
-      {activeTab === 'insights' ? (
-        <div>
-          <div className="mb-4">
-            <InsightsModule insights={insights}/>
+      <div className="w-[80vw]">
+        {activeTab === 'insights' ? (
+          <div>
+            <div className="mb-4">
+              <InsightsModule insights={insights}/>
+            </div>
+            <div className="mb-4">
+              <EqInsightsModule eqInsights={eqInsights}/>
+            </div>
           </div>
+        ) : activeTab === 'feature_analysis' ? (
           <div className="mb-4">
-            <EqInsightsModule eqInsights={eqInsights}/>
+            <ShapModule shapData={shapData}/>
           </div>
-        </div>
-      ) : activeTab === 'feature_analysis' ? (
-        <div className="mb-4">
-          <ShapModule shapData={shapData}/>
-        </div>
-      ) : (
-        <PredictionModule />
-      )}
+        ) : (
+          <PredictionModule />
+        )}
+      </div>
 
       <ToastContainer 
         position="top-right"
