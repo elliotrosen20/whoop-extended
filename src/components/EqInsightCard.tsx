@@ -15,7 +15,7 @@ interface EqInsightCardProps {
 function EqInsightCard ({
   eqInsight
 }: EqInsightCardProps) {
-  const { feature1, feature2, feature1_units, feature2_units, ratio, description } = eqInsight;
+  const { feature1, feature2, ratio, description } = eqInsight;
 
   return (
     <div className="bg-white shadow-md p-6 transition-all duration-300 hover:shadow-xl">
