@@ -25,8 +25,16 @@ function Dashboard() {
   const [activeTab, setActiveTab] = useState<string>('insights');
 
   const fileId = localStorage.getItem('fileId');
+  const insightsReady = localStorage.getItem('insightsReady') === 'true';
 
   let hasAnyError = false;
+
+  useEffect(() => {
+    if (!fileId || !insightsReady) {
+      console.log('Missing fileId or insights not ready, redirecting to upload page');
+      navigate('/upload');
+    }
+  }, [fileId, insightsReady, navigate])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -90,9 +98,14 @@ function Dashboard() {
   }, [])
 
   const handleReset = async () => {
-    // add logic for prompt for "are you sure"
+    const isConfirmed = window.confirm("Are you sure you want to reset? All current data will be lost.");
+    
+    if (!isConfirmed) {
+      return; // If the user presses 'Cancel', exit the function
+    }
+  
     setIsLoading(true);
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    await new Promise(resolve => setTimeout(resolve, 2000)); // Simulating a delay
     navigate('/upload');
   }
 
@@ -106,7 +119,7 @@ function Dashboard() {
           loading={isLoading}
           size={35}
         />
-        <span>Populating dashboard...</span>
+        {/* <span>Populating dashboard...</span> */}
       </div>
     )
   }
@@ -121,7 +134,7 @@ function Dashboard() {
     // <div className="w-full px-4 sm:px-6 lg:px-8 max-w-full mx-auto">
     <div className="">
       <div className="mb-6">
-        <h1 className="text-4xl font-bold text-gray-800 text-center">Dashboard</h1>
+        <h1 className="text-4xl font-bold text-gray-800 text-center">Whoop+</h1>
         <button
           onClick={handleReset}
           className="mt-4"
@@ -131,7 +144,7 @@ function Dashboard() {
       </div>
 
 
-      <div className="flex justify-center space-x-4 mb-6">
+      <div className="flex justify-between mb-6 p-4 bg-gray-50 rounded-lg shadow-md">
         <button
           onClick={() => setActiveTab('insights')}
           className={activeTab === 'insights' ? 'active' : ''}
@@ -157,12 +170,12 @@ function Dashboard() {
           <div>
             
             <h2 className="text-2xl font-semibold text-gray-800 mb-6 text-center">Recovery Insights</h2>
-            <div className="mb-4 bg-black">
+            <div className="mb-4 bg-gray-500 rounded-xl">
               <InsightsModule insights={insights}/>
             </div>
 
             <h2 className="text-2xl font-semibold text-gray-800 mb-6 text-center mt-20">Equivalence Factors</h2>
-            <div className="mb-4 bg-black">
+            <div className="mb-4 bg-gray-500 rounded-xl">
               <EqInsightsModule eqInsights={eqInsights}/>
             </div>
           </div>

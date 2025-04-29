@@ -13,10 +13,10 @@ function Upload() {
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  //when navigating back to this component from dashboard on reset? 
-  // useEffect(() => {
-  //   handleNewUpload();
-  // }, [])
+  useEffect(() => {
+    localStorage.removeItem('fileId');
+    localStorage.removeItem('insightsReady');
+  }, []);
 
   const handleSubmit = async () => {
     try {
@@ -115,6 +115,7 @@ function Upload() {
 
   const handleNewUpload = () => {
     localStorage.removeItem('fileId');
+    localStorage.removeItem('insightsReady');
     setFileId(null);
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
@@ -138,8 +139,20 @@ function Upload() {
   }
 
   return (
-    <div>
-      <h1>CSV Upload</h1>
+    <div className="max-w-4xl mx-auto p-6">
+      <h1 className="text-3xl font-bold text-center mb-8">WHOOP Extended Insights</h1>
+      <div className="bg-gray-50 p-6 rounded-lg shadow-sm mb-8">
+        <h2 className="text-xl font-semibold mb-4">How to Export Your WHOOP Data:</h2>
+        <ol className="list-decimal pl-6 space-y-2 text-left">
+          <li>Log into your <a href="https://app.whoop.com" className="text-blue-600 hover:underline">WHOOP account</a></li>
+          <li>Navigate to your Profile section</li>
+          <li>Select "Data Export" from the menu</li>
+          <li>Choose "Export All Data" option</li>
+          <li>Once downloaded, unzip the folder</li>
+          <li>Locate the <strong>physiological_cycles.csv</strong> file in the unzipped folder</li>
+          <li>Upload this raw CSV file below without modifying it</li>
+        </ol>
+      </div>
 
       {fileId ? (
         <div className="flex flex-col gap-4">
