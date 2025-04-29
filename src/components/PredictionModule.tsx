@@ -81,7 +81,7 @@ function PredictionModule () {
     setLoading(true);
     setPrediction(null);
     try {
-      const response = await fetch(`/api/analyze/predict/${fileId}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/analyze/predict/${fileId}`, {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',
@@ -105,42 +105,7 @@ function PredictionModule () {
       setLoading(false)
     }
   }
-  // return (
-  //   <div>
-  //     <h1>Recovery Score Predictor</h1>
-  //     <p>Adjust the sliders to simulate different biometric states and estimate recovery score.</p>
-
-  //     <form onSubmit={handleSubmit}>
-  //       {sliderConfigs.map((config) => (
-  //         <SliderInput
-  //           key={config.name}
-  //           name={config.name}
-  //           label={config.label}
-  //           min={config.min}
-  //           max={config.max}
-  //           step={config.step || 1}
-  //           value={inputs[config.name]}
-  //           onChange={handleInputChange}
-  //         />
-  //       ))}
-
-  //       <button type="submit" disabled={loading}>
-  //         {loading ? 'Predicting...' : 'Predict Recovery Score'}
-  //       </button>
-  //     </form>
-
-  //     {prediction !== null && (
-  //       <div className="mt-8 text-center p-6 bg-gray-50 rounded-lg shadow-md">
-  //         <h2 className="text-2xl font-bold text-gray-800 mb-4">
-  //           Predicted WHOOP Recovery Score
-  //         </h2>
-  //         <div className="text-5xl font-bold text-green-600">
-  //           {prediction}
-  //         </div>
-  //       </div>
-  //     )}
-  //   </div>
-  // )
+  
   return (
     // <div className="w-full mx-auto px-4 sm:px-6 lg:px-8 bg-gray-100 py-8">
     <div className="px-4 sm:px-6 lg:px-8 bg-gray-100 py-8 rounded-xl">

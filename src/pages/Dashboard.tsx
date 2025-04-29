@@ -40,9 +40,9 @@ function Dashboard() {
     const fetchData = async () => {
       try {
         const routes = [
-          `/api/analyze/insights/${fileId}`,
-          `/api/analyze/eqInsights/${fileId}`,
-          `/api/analyze/shap/${fileId}`
+          `${import.meta.env.VITE_API_URL}/api/analyze/insights/${fileId}`,
+          `${import.meta.env.VITE_API_URL}/api/analyze/eqInsights/${fileId}`,
+          `${import.meta.env.VITE_API_URL}/api/analyze/shap/${fileId}`
         ]
 
         setHasError(false);

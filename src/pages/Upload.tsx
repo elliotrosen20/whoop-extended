@@ -30,7 +30,7 @@ function Upload() {
 
       fd.append('file', file);
 
-      const response = await fetch('/api/upload', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/upload`, {
         method: "POST",
         body: fd
       })
@@ -92,7 +92,7 @@ function Upload() {
     await new Promise(resolve => setTimeout(resolve, 5000));
     
     try {
-      const response = await fetch(`/api/analyze/model/${fileId}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/analyze/model/${fileId}`, {
         method: "POST"
       });
 
