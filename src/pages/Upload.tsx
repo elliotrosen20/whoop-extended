@@ -151,6 +151,7 @@ function Upload() {
           <li>Locate the <strong>physiological_cycles.csv</strong> file in the unzipped folder</li>
           <li>Upload this raw CSV file below without modifying it</li>
         </ol>
+        <h5>Note: Several hundred days/nights worth of data is required for accuracy of insights and predictions</h5>
       </div>
 
       {fileId && localStorage.getItem('insightsReady') === 'true' ? (
