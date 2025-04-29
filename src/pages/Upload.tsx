@@ -14,8 +14,10 @@ function Upload() {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    localStorage.removeItem('fileId');
-    localStorage.removeItem('insightsReady');
+    const storedFileId = localStorage.getItem('fileId');
+    if (storedFileId) {
+      setFileId(storedFileId);
+    }
   }, []);
 
   const handleSubmit = async () => {
@@ -140,7 +142,7 @@ function Upload() {
 
   return (
     <div className="max-w-4xl mx-auto p-6">
-      <h1 className="text-3xl font-bold text-center mb-8">WHOOP Extended Insights</h1>
+      <h1 className="text-3xl font-bold text-center mb-8">Upload your data</h1>
       <div className="bg-gray-50 p-6 rounded-lg shadow-sm mb-8">
         <h2 className="text-xl font-semibold mb-4">How to Export Your WHOOP Data:</h2>
         <ol className="list-decimal pl-6 space-y-2 text-left">
@@ -154,7 +156,26 @@ function Upload() {
         </ol>
       </div>
 
-      {fileId ? (
+      {fileId && localStorage.getItem('insightsReady') === 'true' ? (
+        // User has already generated insights
+        <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 text-center">
+          <h2 className="text-xl font-semibold mb-3">You've already analyzed a file.</h2>
+          <p className="mb-6">Your insights are ready to view in the dashboard.</p>
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <button
+              onClick={() => navigate('/dashboard')}
+            >
+              View Dashboard
+            </button>
+            <button 
+              onClick={handleNewUpload}
+            >
+              Upload a New File
+            </button>
+          </div>
+        </div>
+      ) : fileId ? (
         <div className="flex flex-col gap-4">
           <button
             onClick={handleGenerate}

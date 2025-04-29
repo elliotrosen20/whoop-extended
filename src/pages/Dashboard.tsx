@@ -101,11 +101,15 @@ function Dashboard() {
     const isConfirmed = window.confirm("Are you sure you want to reset? All current data will be lost.");
     
     if (!isConfirmed) {
-      return; // If the user presses 'Cancel', exit the function
+      return;
     }
   
     setIsLoading(true);
-    await new Promise(resolve => setTimeout(resolve, 2000)); // Simulating a delay
+
+    localStorage.removeItem('fileId');
+    localStorage.removeItem('insightsReady');
+
+    await new Promise(resolve => setTimeout(resolve, 2000));
     navigate('/upload');
   }
 
@@ -134,7 +138,7 @@ function Dashboard() {
     // <div className="w-full px-4 sm:px-6 lg:px-8 max-w-full mx-auto">
     <div className="">
       <div className="mb-6">
-        <h1 className="text-4xl font-bold text-gray-800 text-center">Whoop+</h1>
+        <h1 className="text-4xl font-bold text-gray-800 text-center">Whoop Extended</h1>
         <button
           onClick={handleReset}
           className="mt-4"
