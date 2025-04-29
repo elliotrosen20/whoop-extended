@@ -1,10 +1,43 @@
 ## Whoop Recovery Prediction
 
-
+Web app for analyzing WHOOP recovery scores using personalized biometric data. Users upload raw data exported from the WHOOP app, and the system trains a machine learning model on-the-fly to generate detailed, individualized recovery insights.
 
 ## Live Demo
 
+This app helps users understand what drives their WHOOP recovery scores using explainable machine learning.
 
+### Workflow Overview
+1. **Upload WHOOP Data**  
+   Upload a single CSV file from your exported WHOOP data (specifically, the *Physiological Cycles* file).  
+2. **Model Training (Backend)**  
+   A custom XGBoost model is trained on your personal data. It is saved and used to:
+   - Generate **feature importances**
+   - Compute **SHAP values**
+   - Create **insights** into how different metrics affect your recovery
+3. **Interactive Dashboard (Frontend)**  
+   Once backend processing is complete, a 3-tab React dashboard is loaded to explore:
+   
+   - **Insights**  
+     - *Recovery Insights*: "Increasing HRV by 11.58 ms helps recovery by 2 points"
+     - *Equivalence Factors*: "Increasing HRV by 11.58 ms is equivalent to decreasing RHR by 0.07 bpm"
+   - **Feature Analysis**  
+     - Bar chart of model feature importances  
+     - SHAP waterfall plot showing how each feature affects predictions
+   - **Simulate**  
+     - Interactive toggle panel to simulate different input values  
+     - Instantly predict a new recovery score using your trained model
+
+### Stack
+
+- **Frontend**: React + Vite + TailwindCSS
+- **Backend**: Python (Flask API)  
+- **ML Models**: XGBoost (trained per user) or neural net
+- **Deployments**: Render (frontend as static site, backend as web service)
+
+## Live Demo
+
+- Frontend: https://whoop-extended.onrender.com/
+- Backend API: https://whoop-backend.onrender.com/
 
 ## Project Overview
 
