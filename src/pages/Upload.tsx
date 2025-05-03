@@ -74,6 +74,38 @@ function Upload() {
     }
   }
 
+  const handleUseDemo = async () => {
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/demo`, {
+        method: "GET"
+      });
+  
+      const data = await response.json();
+  
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to load demo');
+      }
+  
+      if (!data.file_id) {
+        throw new Error('Server response missing file ID');
+      }
+  
+      localStorage.setItem('fileId', data.file_id);
+      setFileId(data.file_id);
+      toast.success('Demo file loaded successfully!');
+    } catch (error) {
+      console.error('Demo loading error:', error);
+      
+      let errorMessage: string;
+      if (error instanceof Error) {
+        errorMessage = error.message;
+      } else {
+        errorMessage = 'Failed to load demo file';
+      }
+      toast.error(errorMessage);
+    }
+  }
+
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0] || null
     setFile(selectedFile);
@@ -205,11 +237,15 @@ function Upload() {
                       hover:file:bg-blue-100 mt-4
                       border-blue-500 border-2'
           />
-          <button 
-            onClick={handleSubmit}
-          >
-            Upload
-          </button>
+          <div className="flex flex-row justify-center items-center gap-4">
+            <button onClick={handleSubmit}>
+              Upload
+            </button>
+            <h3>or</h3>
+            <button onClick={handleUseDemo}>
+              Try Demo
+            </button>
+          </div>
         </div>
       )}
 

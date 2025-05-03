@@ -47,3 +47,12 @@ def upload_file():
     }), 200
   
   return jsonify({'error': 'File type not allowed'}), 400
+
+
+@upload_bp.route('/demo', methods=['GET'])
+def get_demo_file():
+    return jsonify({
+        'success': True,
+        'message': 'Demo file loaded successfully',
+        'file_id': 'demo_whoop_data'  # No need for UUID
+    }), 200
