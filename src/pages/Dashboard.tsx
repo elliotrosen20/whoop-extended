@@ -11,7 +11,6 @@ import InsightsModule from "../components/InsightsModule";
 import EqInsightsModule from "../components/EqInsightsModule";
 import PredictionModule from "../components/PredictionModule";
 
-
 function Dashboard() {
   // need to add types
   const navigate = useNavigate();
@@ -35,6 +34,11 @@ function Dashboard() {
       navigate('/upload');
     }
   }, [fileId, insightsReady, navigate])
+
+  // if (!fileId || !insightsReady) {
+  //   console.log('Missing fileId or insights not ready, redirecting to upload page');
+  //   return <Navigate to="/upload" replace />;
+  // }
 
   useEffect(() => {
     const fetchData = async () => {
