@@ -177,14 +177,14 @@ function Upload() {
       <h1 className="text-3xl font-bold text-center mb-8">Upload your data</h1>
       <div className="bg-gray-50 p-6 rounded-lg shadow-sm mb-8">
         <h2 className="text-xl font-semibold mb-4">How to Export Your WHOOP Data:</h2>
-        <ol className="list-decimal pl-6 space-y-2 text-left">
+        <ol className="list-decimal pl-6 space-y-2 text-left mb-4">
           <li>Instructions on exporting your data from your Whoop app can be found <a href="https://support.whoop.com/s/article/How-to-Export-Your-Data?language=en_US" className="text-blue-600 hover:underline">here</a></li>
           <li>Once downloaded, unzip the folder</li>
           <li>Locate the <strong>physiological_cycles.csv</strong> file in the unzipped folder</li>
           <li>Upload this raw CSV file below without modifying it</li>
         </ol>
         <hr />
-        <h3>Note: Several hundred days/nights worth of data is required for accuracy of insights and predictions</h3>
+        <h3 className="mt-4">Several hundred days’ or nights’ worth of data are required for accurate insights and predictions.</h3>
       </div>
 
       {fileId && localStorage.getItem('insightsReady') === 'true' ? (
