@@ -184,7 +184,7 @@ function Upload() {
           <li>Upload this raw CSV file below without modifying it</li>
         </ol>
         <hr />
-        <h3 className="mt-4">Several hundred days’ or nights’ worth of data are required for accurate insights and predictions.</h3>
+        <h3 className="mt-4">Note: Several hundred nights’ worth of data are required for accurate insights and predictions.</h3>
       </div>
 
       {fileId && localStorage.getItem('insightsReady') === 'true' ? (
