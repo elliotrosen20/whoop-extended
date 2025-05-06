@@ -25,7 +25,7 @@ function EqInsightCard ({
         </h3>
         <div className="flex items-center text-blue-600">
           <span className="text-3xl font-bold">
-            {Math.abs(ratio).toFixed(4)}×
+            {Math.abs(ratio).toFixed(1)}×
           </span>
           <span className="ml-1 text-sm">ratio</span>
         </div>
