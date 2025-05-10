@@ -111,7 +111,7 @@ def calculate_eq_insights(insights):
                 ratio = float(feature1_impact / feature2_impact)
                 eq_amount = abs(feature2_change * ratio)
 
-                if abs(ratio) > 5.0:
+                if abs(ratio) > 15.0:
                     continue
 
                 direction_word = "increasing" if (feature1_impact * feature2_impact) > 0 else "decreasing"
