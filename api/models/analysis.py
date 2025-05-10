@@ -43,8 +43,7 @@ def eval_model(model, X_test, y_test):
     print(f"Test MAE: {test_mae:.4f}")
     print(f"Test R2: {test_r2:.4f}")
 
-TOP_FEATURES = ['Heart rate variability (ms)', 'Resting heart rate (bpm)', 'In bed duration (min)', 'Asleep duration (min)', 'REM duration (min)'];
-
+TOP_FEATURES = ['Heart rate variability (ms)', 'Resting heart rate (bpm)', 'REM duration (min)'];
 
 def calculate_insights(model, df_clean):
     print(df_clean.shape)
@@ -111,6 +110,9 @@ def calculate_eq_insights(insights):
             if feature2_impact != 0:
                 ratio = float(feature1_impact / feature2_impact)
                 eq_amount = abs(feature2_change * ratio)
+
+                if abs(ratio) > 5.0:
+                    continue
 
                 direction_word = "increasing" if (feature1_impact * feature2_impact) > 0 else "decreasing"
                 description = f"Increasing {feature1_name} by {feature1_change:.2f} {feature1_units} is equivalent to {direction_word} {feature2_name} by {eq_amount:.2f} {feature2_units}"
