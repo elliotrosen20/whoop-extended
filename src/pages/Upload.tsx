@@ -10,6 +10,7 @@ function Upload() {
   const navigate = useNavigate();
   const [isGenerating, setIsGenerating] = useState<boolean>(false);
   const [fileId, setFileId] = useState<string | null>(null);
+  const [isDemoLoading, setIsDemoLoading] = useState<boolean>(false);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -76,6 +77,8 @@ function Upload() {
 
   const handleUseDemo = async () => {
     try {
+      setIsDemoLoading(true);
+
       const response = await fetch(`${import.meta.env.VITE_API_URL}/api/demo`, {
         method: "GET"
       });
@@ -103,6 +106,8 @@ function Upload() {
         errorMessage = 'Failed to load demo file';
       }
       toast.error(errorMessage);
+    } finally {
+      setIsDemoLoading(false);
     }
   }
 
@@ -242,8 +247,11 @@ function Upload() {
               Upload
             </button>
             <h3>or</h3>
-            <button onClick={handleUseDemo}>
-              Try Demo
+            <button 
+              onClick={handleUseDemo}
+              disabled={isDemoLoading}
+            >
+              {isDemoLoading ? 'Loading Demo...' : 'Try Demo'}
             </button>
           </div>
         </div>
