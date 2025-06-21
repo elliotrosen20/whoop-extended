@@ -51,7 +51,7 @@ def train_xgboost_kfold_early_stop(X, y, n_splits=5, RANDOM_STATE=42):
         rmse_scores.append(rmse)
         print(f"Fold {fold+1} — R2: {r2:.4f}, RMSE: {rmse:.4f}, Estimators used: {model.best_iteration + 1}")
 
-    print(f"\n📊 Cross-Validation with Early Stopping Results ({n_splits}-fold):")
+    print(f"\n Cross-Validation with Early Stopping Results ({n_splits}-fold):")
     print(f"Avg R²: {np.mean(val_scores):.4f} ± {np.std(val_scores):.4f}")
     print(f"Avg RMSE: {np.mean(rmse_scores):.2f} ± {np.std(rmse_scores):.2f}")
 
