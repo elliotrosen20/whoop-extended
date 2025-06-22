@@ -22,6 +22,8 @@ function Dashboard() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [hasError, setHasError] = useState<boolean>(false);
   const [activeTab, setActiveTab] = useState<string>('insights');
+  const [showInsightsTooltip, setShowInsightsTooltip] = useState<boolean>(false);
+  const [showEqTooltip, setShowEqTooltip] = useState<boolean>(false);
 
   const fileId = localStorage.getItem('fileId');
   const insightsReady = localStorage.getItem('insightsReady') === 'true';
@@ -173,16 +175,54 @@ function Dashboard() {
         </button>
       </div>
 
+      <p className="text-center text-gray-500 text-sm mb-8">Hover over <span className="font-bold">?</span> for explanations</p>
+      
       <div className="w-[80vw]">
         {activeTab === 'insights' ? (
           <div>
             
-            <h2 className="text-2xl font-semibold text-gray-800 mb-6 text-center">Recovery Insights</h2>
+            <div className="flex items-center justify-center mb-6">
+              <h2 className="text-2xl font-semibold text-gray-800 text-center">Recovery Insights</h2>
+              <div className="relative ml-2">
+                <button
+                  className="w-5 h-5 bg-gray-200 hover:bg-gray-300 rounded-full flex items-center justify-center text-xs font-medium text-gray-600 transition-colors"
+                  onMouseEnter={() => setShowInsightsTooltip(true)}
+                  onMouseLeave={() => setShowInsightsTooltip(false)}
+                >
+                  ?
+                </button>
+                {showInsightsTooltip && (
+                  <div className="absolute left-1/2 transform -translate-x-1/2 top-6 w-80 bg-gray-800 text-white text-sm p-3 rounded-lg shadow-lg z-10">
+                    <div className="font-medium mb-1">Recovery Insights:</div>
+                    <div>Actionable recommendations showing how changing specific behaviors (sleep, strain, etc.) would impact your recovery score. Each card shows the potential improvement from optimizing that factor.</div>
+                    <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-gray-800 rotate-45"></div>
+                  </div>
+                )}
+              </div>
+            </div>
             <div className="mb-4 bg-gray-500 rounded-xl">
               <InsightsModule insights={insights}/>
             </div>
 
-            <h2 className="text-2xl font-semibold text-gray-800 mb-6 text-center mt-20">Equivalence Factors</h2>
+            <div className="flex items-center justify-center mb-6 mt-20">
+              <h2 className="text-2xl font-semibold text-gray-800 text-center">Equivalence Factors</h2>
+              <div className="relative ml-2">
+                <button
+                  className="w-5 h-5 bg-gray-200 hover:bg-gray-300 rounded-full flex items-center justify-center text-xs font-medium text-gray-600 transition-colors"
+                  onMouseEnter={() => setShowEqTooltip(true)}
+                  onMouseLeave={() => setShowEqTooltip(false)}
+                >
+                  ?
+                </button>
+                {showEqTooltip && (
+                                     <div className="absolute left-1/2 transform -translate-x-1/2 top-6 w-80 bg-gray-800 text-white text-sm p-3 rounded-lg shadow-lg z-10">
+                     <div className="font-medium mb-1">Equivalence Factors:</div>
+                     <div>Shows the ratio between different recovery factors. For example, "3.2× ratio" means changing one factor by a certain amount has the same recovery impact as changing another factor by 3.2× that amount.</div>
+                     <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-gray-800 rotate-45"></div>
+                   </div>
+                )}
+              </div>
+            </div>
             <div className="mb-4 bg-gray-500 rounded-xl">
               <EqInsightsModule eqInsights={eqInsights}/>
             </div>

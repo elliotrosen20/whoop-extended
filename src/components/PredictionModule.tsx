@@ -65,6 +65,7 @@ function PredictionModule () {
 
   const [prediction, setPrediction] = useState<number | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
+  const [showTooltip, setShowTooltip] = useState<boolean>(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -109,7 +110,25 @@ function PredictionModule () {
   return (
     // <div className="w-full mx-auto px-4 sm:px-6 lg:px-8 bg-gray-100 py-8">
     <div className="px-4 sm:px-6 lg:px-8 bg-gray-100 py-8 rounded-xl">
-      <h1 className="text-3xl font-bold text-gray-800 mb-4 text-center">Recovery Score Predictor</h1>
+      <div className="flex items-center justify-center mb-4">
+        <h1 className="text-3xl font-bold text-gray-800 text-center">Recovery Score Predictor</h1>
+        <div className="relative ml-3">
+          <button
+            className="w-5 h-5 bg-gray-200 hover:bg-gray-300 rounded-full flex items-center justify-center text-xs font-medium text-gray-600 transition-colors"
+            onMouseEnter={() => setShowTooltip(true)}
+            onMouseLeave={() => setShowTooltip(false)}
+          >
+            ?
+          </button>
+          {showTooltip && (
+            <div className="absolute left-1/2 transform -translate-x-1/2 top-6 w-80 bg-gray-800 text-white text-sm p-3 rounded-lg shadow-lg z-10">
+              <div className="font-medium mb-1">Recovery Score Predictor:</div>
+              <div>Use the sliders to simulate different biometric values and see how they would affect your predicted recovery score. Based on your personal model trained from your data.</div>
+              <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-gray-800 rotate-45"></div>
+            </div>
+          )}
+        </div>
+      </div>
       <p className="text-gray-600 text-center mb-8">Adjust the sliders to simulate different biometric states and estimate recovery score.</p>
 
       <form onSubmit={handleSubmit}>
