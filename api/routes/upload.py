@@ -20,7 +20,6 @@ def allowed_file(filename):
 def upload_file():
   print("UPLOAD endpoint hit with method:", request.method)
   if request.method == 'OPTIONS':
-        # This is just the preflight; return 200 with appropriate headers
         return '', 200
 
   if 'file' not in request.files:
@@ -54,5 +53,5 @@ def get_demo_file():
     return jsonify({
         'success': True,
         'message': 'Demo file loaded successfully',
-        'file_id': 'demo_whoop_data'  # No need for UUID
+        'file_id': 'demo_whoop_data'
     }), 200
