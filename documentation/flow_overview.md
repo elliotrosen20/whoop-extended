@@ -376,31 +376,31 @@ Raw WHOOP CSV → Preprocessing → Feature Engineering → XGBoost → Insights
 
 ## Advantages
 
-### 🚀 Performance
+### Performance
 - **Parallel API calls** for fast dashboard loading
 - **In-memory caching** eliminates repeated ML training
 - **Client-side routing** for instant navigation
 - **Optimized XGBoost** with early stopping
 
-### 🎯 User Experience
+### User Experience
 - **Progressive enhancement** - app works even if some features fail
 - **Clear loading states** with spinners and feedback
 - **Interactive predictions** with real-time slider adjustments
 - **Comprehensive analysis** - insights, visualizations, simulations
 
-### 🧠 Machine Learning
+### Machine Learning
 - **Robust validation** with 5-fold cross-validation
 - **Interpretable AI** using SHAP analysis
 - **Feature engineering** for better predictions
 - **Actionable insights** with specific recommendations
 
-### 🏗️ Architecture
+### Architecture
 - **Modular design** with clear separation of concerns
 - **Type safety** with TypeScript
 - **Modern tooling** (Vite, Tailwind, React 19)
 - **RESTful API** design
 
-### 🔧 Development
+### Development
 - **Simple deployment** - no database required
 - **Easy debugging** with clear error handling
 - **Extensible** - easy to add new analysis types
@@ -410,31 +410,31 @@ Raw WHOOP CSV → Preprocessing → Feature Engineering → XGBoost → Insights
 
 ## Disadvantages
 
-### 💾 Data Persistence
+### Data Persistence
 - **Session loss** on server restart - all analysis lost
 - **No user accounts** - can't save multiple analyses
 - **Memory leaks** - cache grows indefinitely
 - **No data backup** - uploaded files not persistent
 
-### 📈 Scalability
+### Scalability
 - **Single-server limitation** - no horizontal scaling
 - **Memory constraints** - RAM usage grows with users
 - **No load balancing** - single point of failure
 - **Concurrent user limits** - shared cache conflicts
 
-### 🔒 Security & Privacy
+### Security & Privacy
 - **No authentication** - anyone can access any file_id
 - **Sensitive health data** stored in memory without encryption
 - **No rate limiting** - vulnerable to abuse
 - **File cleanup** - uploaded files accumulate on disk
 
-### 🐛 Error Handling
+### Error Handling
 - **Cache dependency** - if cache corrupted, analysis lost
 - **No retry mechanisms** - API failures require restart
 - **Limited error recovery** - users must re-upload on issues
 - **Silent failures** - some errors not surfaced to users
 
-### 🔧 Maintenance
+### Maintenance
 - **Manual ML retraining** - no automated model updates
 - **No monitoring** - no insights into system performance
 - **Limited logging** - difficult to debug production issues
