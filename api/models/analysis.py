@@ -154,7 +154,6 @@ def calculate_shap_values(model, df_clean):
             'name': feature_name,
             'units': units,
             'importance': float(feature_importances[i]),
-            # 'shap_values': shap_values[:, i].tolist()
             'mean_shap_value':float(shap_values[:, i].mean())
         })
     
