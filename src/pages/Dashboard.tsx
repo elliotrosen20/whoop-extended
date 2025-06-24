@@ -12,7 +12,6 @@ import EqInsightsModule from "../components/EqInsightsModule";
 import PredictionModule from "../components/PredictionModule";
 
 function Dashboard() {
-  // need to add types
   const navigate = useNavigate();
 
   const [insights, setInsights] = useState([]);
