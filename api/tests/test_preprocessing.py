@@ -49,16 +49,13 @@ def test_model_prep_separates_features_and_target():
 
 
 def test_preprocess_handles_missing_values():
-    # Test with missing values that won't be filtered out by the >= 300 condition
     df = pd.DataFrame({
-        'Asleep duration (min)': [400, 500, 350],  # All values >= 300
-        'Heart rate variability (ms)': [45, np.nan, 35],  # Missing value in different column
+        'Asleep duration (min)': [400, 500, 350],
+        'Heart rate variability (ms)': [45, np.nan, 35],
         'Recovery score %': [80, 85, 90]
     })
     
     result = preprocess_data(df)
     
-    # After preprocessing, NaN values should be filled with median
     assert result['Heart rate variability (ms)'].isna().sum() == 0
-    # The median of [45, 35] is 40, so the NaN should be replaced with 40
     assert result['Heart rate variability (ms)'].iloc[1] == 40.0 

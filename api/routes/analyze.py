@@ -97,44 +97,7 @@ def get_shap(file_id):
       'error': str(e),
       'status': 'error'
     }), 500
-  
-# @analyze_bp.route('/analyze/predict/<file_id>', methods=['POST'])
-# def get_prediction(file_id):
-#   try:
-#     data = request.json
 
-#     required_fields = ["rhr", "hrv", "temp", "spo2", "resp", "asleep", 
-#                         "in_bed", "light", "deep", "rem", "awake", 
-#                         "sleep_need", "sleep_debt"]
-    
-#     missing_fields = [field for field in required_fields if field not in data]
-#     if missing_fields:
-#       return jsonify({
-#         "error": f"Missing required fields: {', '.join(missing_fields)}"
-#       }), 400
-#   except Exception as e:
-#     return jsonify({
-#       'error': f"Error during prediction: {str(e)}",
-#       'status': 'error'
-#     }), 500
-
-#   try:
-#     model = cache[file_id]['model']
-#   except KeyError:
-#     return jsonify({
-#       'error': 'Prediction model not found for the given file ID',
-#       'status': 'error'
-#     }), 404
-#   except Exception as e:
-#     return jsonify({
-#       'error': str(e),
-#       'status': 'error'
-#     }), 500
-  
-#   res = final_prediction(model, data)
-#   return jsonify({
-#     'prediction': res,
-#   })
 
 @analyze_bp.route('/analyze/predict/<file_id>', methods=['POST'])
 def get_prediction(file_id):
@@ -164,7 +127,6 @@ def get_prediction(file_id):
         'status': 'error'
       }), 404
     
-    # Add a try/except for the final_prediction call
     try:
       res = final_prediction(model, data)
       return jsonify({
