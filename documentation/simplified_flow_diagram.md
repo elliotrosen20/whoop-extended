@@ -4,17 +4,25 @@ This diagram presents the essential user journey through WHOOP Extended, distill
 
 ```mermaid
 graph TD
-    A["1. Upload File<br/>CSV or Demo Data"] --> B["2. Store & Process<br/>UUID + Data Preprocessing"]
-    B --> C["3. ML Training<br/>XGBoost Model Training"]
-    C --> D["4. Generate Analysis<br/>Insights + SHAP + Equivalencies"]
-    D --> E["5. Dashboard View<br/>Three-Tab Interface"]
-    E --> F["6. Interactive Explore<br/>Insights & Feature Analysis"]
-    E --> G["7. Real-time Predict<br/>Custom Biometric Sliders"]
-    
-    F --> E
-    G --> E
-    G --> H["Reset & New Analysis"]
-    H --> A
+    A["1. Upload File<br/>CSV or Demo Data"];
+    B["2. Store & Process<br/>UUID + Data Preprocessing"];
+    C["3. ML Training<br/>XGBoost Model Training"];
+    D["4. Generate Analysis<br/>Insights + SHAP + Equivalencies"];
+    E["5. Dashboard View<br/>Three-Tab Interface"];
+    F["6. Interactive Explore<br/>Insights & Feature Analysis"];
+    G["7. Real-time Predict<br/>Custom Biometric Sliders"];
+    H["Reset & New Analysis"];
+
+    A --> B;
+    B --> C;
+    C --> D;
+    D --> E;
+    E --> F;
+    E --> G;
+    F --> E;
+    G --> E;
+    G --> H;
+    H --> A;
     
     style A,B,C,D,E,F,G,H fill:#ffffff,stroke:#000000,color:#000000
 ```
