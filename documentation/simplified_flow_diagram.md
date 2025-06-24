@@ -6,11 +6,11 @@ This diagram provides a high-level overview of the application's core workflow, 
 graph TD
     A["1. User Uploads Data<br/>(via Frontend)"] --> B["2. Backend Stores File<br/>Generates a unique ID"]
     B --> C["3. Frontend Receives ID<br/>User triggers analysis"]
-    C --> D["4. Backend Runs ML Pipeline<br/>- Preprocessing<br/>- Model Training<br/>- Insight Generation"]
+    C --> D["4. Backend Runs ML Pipeline<br/>Preprocessing<br/>Model Training<br/>Insight Generation"]
     D --> E["5. Results Cached<br/>Model and insights are stored in-memory"]
     E --> F["6. Frontend Navigates<br/>to Dashboard"]
     F --> G["7. Dashboard Fetches Data<br/>from Backend Cache"]
-    G --> H["8. UI Renders Analysis<br/>- Insights<br/>- SHAP Charts"]
+    G --> H["8. UI Renders Analysis<br/>Insights<br/>SHAP Charts"]
     H --> I["9. User Interacts with Simulator<br/>(Adjusts sliders)"]
     I --> J["10. Backend Makes Live Prediction<br/>Using the cached model"]
     J --> H
