@@ -158,24 +158,24 @@ graph TB
 
 ## Key System Characteristics
 
-### 🔄 **Session Flow**
+### **Session Flow**
 1. **File Upload** → UUID generation → localStorage storage
 2. **Analysis Generation** → ML training → cache population
 3. **Dashboard Access** → parallel data loading → UI rendering
 4. **Interactive Prediction** → real-time model inference
 
-### 💾 **Data Management**
+### **Data Management**
 - **Client-side**: Minimal localStorage (fileId, insightsReady)
 - **Server-side**: In-memory caching with complete analysis results
 - **File Storage**: Local uploads directory with UUID naming
 
-### 🚀 **Performance Optimizations**
+### **Performance Optimizations**
 - **Parallel API calls** for dashboard data loading
 - **In-memory caching** eliminates repeated ML training
 - **Early stopping** in XGBoost training
 - **Progressive enhancement** with graceful error handling
 
-### 🔒 **Session Management**
+### **Session Management**
 - **Navigation guards** prevent unauthorized access
 - **Automatic redirects** based on session state
 - **Reset functionality** for new analysis workflows

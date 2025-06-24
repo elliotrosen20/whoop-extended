@@ -16,12 +16,7 @@ graph TD
     G --> H["Reset & New Analysis"]
     H --> A
     
-    style A fill:#e3f2fd
-    style C fill:#e8f5e8
-    style D fill:#fff3e0
-    style E fill:#e8f5e8
-    style F fill:#f3e5f5
-    style G fill:#f3e5f5
+    style A,B,C,D,E,F,G,H fill:#ffffff,stroke:#000000,color:#000000
 ```
 
 ## Core Flow Breakdown
