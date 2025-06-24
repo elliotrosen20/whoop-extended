@@ -1,96 +1,30 @@
-# Simplified Flow Diagram (7 Nodes)
+# Simplified System Flow Diagram
 
-This diagram presents the essential user journey through WHOOP Extended, distilled into 7 key nodes that capture the core functionality and value proposition.
+This diagram provides a high-level overview of the application's core workflow, from data upload to interactive analysis, condensed into about 10 key steps.
 
 ```mermaid
 graph TD
-    A["(1) Upload File<br/>CSV or Demo Data"];
-    B["(2) Store & Process<br/>UUID + Data Preprocessing"];
-    C["(3) ML Training<br/>XGBoost Model Training"];
-    D["(4) Generate Analysis<br/>Insights + SHAP + Equivalencies"];
-    E["(5) Dashboard View<br/>Three-Tab Interface"];
-    F["(6) Interactive Explore<br/>Insights & Feature Analysis"];
-    G["(7) Real-time Predict<br/>Custom Biometric Sliders"];
-    H["Reset & New Analysis"];
+    A["1. User Uploads Data<br/>(via Frontend)"] --> B["2. Backend Stores File<br/>Generates a unique ID"]
+    B --> C["3. Frontend Receives ID<br/>User triggers analysis"]
+    C --> D["4. Backend Runs ML Pipeline<br/>- Preprocessing<br/>- Model Training<br/>- Insight Generation"]
+    D --> E["5. Results Cached<br/>Model and insights are stored in-memory"]
+    E --> F["6. Frontend Navigates<br/>to Dashboard"]
+    F --> G["7. Dashboard Fetches Data<br/>from Backend Cache"]
+    G --> H["8. UI Renders Analysis<br/>- Insights<br/>- SHAP Charts"]
+    H --> I["9. User Interacts with Simulator<br/>(Adjusts sliders)"]
+    I --> J["10. Backend Makes Live Prediction<br/>Using the cached model"]
+    J --> H
 
-    A --> B;
-    B --> C;
-    C --> D;
-    D --> E;
-    E --> F;
-    E --> G;
-    F --> E;
-    G --> E;
-    G --> H;
-    H --> A;
-    
-    style A,B,C,D,E,F,G,H fill:#ffffff,stroke:#000000,color:#000000
+    %% Styling to differentiate Frontend and Backend steps
+    style A fill:#e1f5fe,stroke:#333,stroke-width:2px
+    style C fill:#e1f5fe,stroke:#333,stroke-width:2px
+    style F fill:#e1f5fe,stroke:#333,stroke-width:2px
+    style H fill:#e8f5e8,stroke:#333,stroke-width:2px
+    style I fill:#e1f5fe,stroke:#333,stroke-width:2px
+
+    style B fill:#fff3e0,stroke:#333,stroke-width:2px
+    style D fill:#fff3e0,stroke:#333,stroke-width:2px
+    style E fill:#fff3e0,stroke:#333,stroke-width:2px
+    style G fill:#fff3e0,stroke:#333,stroke-width:2px
+    style J fill:#fff3e0,stroke:#333,stroke-width:2px
 ```
-
-## Core Flow Breakdown
-
-### **1. Upload File**
-- **User Action**: Select WHOOP CSV or demo data
-- **System**: File validation and UUID generation
-- **Key APIs**: `POST /api/upload`, `GET /api/demo`
-
-### **2. Store & Process**
-- **System**: Save file, begin data preprocessing
-- **Operations**: Clean data, filter sleep duration, engineer features
-- **Output**: Model-ready dataset
-
-### **3. ML Training**
-- **System**: Train XGBoost regression model
-- **Process**: 5-fold cross-validation with early stopping
-- **Target**: Predict Recovery Score % from biometric data
-
-### **4. Generate Analysis**
-- **System**: Create comprehensive analysis suite
-- **Components**: 
-  - Recovery insights (top 3 features)
-  - Feature equivalency calculations
-  - SHAP interpretability analysis
-
-### **5. Dashboard View**
-- **User Interface**: Three-tab analysis dashboard
-- **Tabs**: Insights, Feature Analysis, Simulate
-- **Data**: Parallel loading from cached analysis results
-
-### **6. Interactive Explore**
-- **User Action**: Navigate insights and visualizations
-- **Features**: 
-  - Carousel of recovery recommendations
-  - SHAP bar charts and waterfall plots
-  - Feature importance rankings
-
-### **7. Real-time Predict**
-- **User Action**: Adjust 13 biometric sliders
-- **System**: Live model inference
-- **Output**: Predicted recovery score with instant feedback
-
-## Key Characteristics
-
-### **Linear Core Flow** (Nodes 1-5)
-- **Sequential Process**: Each step depends on the previous
-- **One-time Setup**: Analysis generated once per dataset
-- **Cached Results**: Fast subsequent access
-
-### **Interactive Loop** (Nodes 5-7)
-- **User Exploration**: Non-linear navigation between features
-- **Real-time Processing**: Instant slider predictions
-- **Session Continuity**: Persistent analysis state
-
-### **Reset Capability**
-- **Fresh Start**: Clear session and return to upload
-- **New Analysis**: Process different dataset
-- **Clean State**: Remove cached data
-
-## Value Proposition Highlights
-
-### **Data Input** → **ML Insights** → **Interactive Experience**
-1. **Effortless Upload**: CSV or demo in one click
-2. **Automated Analysis**: ML training without user intervention  
-3. **Rich Insights**: Multi-dimensional analysis delivery
-4. **Interactive Control**: Real-time prediction capabilities
-
-This simplified flow emphasizes the **core user value**: transforming raw WHOOP data into actionable insights through machine learning, with an intuitive interface for exploration and experimentation. 
