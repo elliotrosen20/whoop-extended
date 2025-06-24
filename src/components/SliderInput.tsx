@@ -18,22 +18,6 @@ function SliderInput({
   onChange
 }: SliderInputProps) {
   return (
-    // <div className="mb-4">
-    //   <label className="flex items-center justify-between">
-    //     <span>{label}:</span>
-    //     <input 
-    //       type="range" 
-    //       name={name} 
-    //       min={min} 
-    //       max={max} 
-    //       step={step} 
-    //       value={value} 
-    //       onChange={onChange} 
-    //       className="w-3/5 mx-3"
-    //     />
-    //     <span className="w-12 text-right">{value}</span>
-    //   </label>
-    // </div>
     <div className="mb-4">
       <label className="flex items-center">
         <span 

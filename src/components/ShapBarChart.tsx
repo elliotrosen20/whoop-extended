@@ -10,7 +10,6 @@ interface ShapDetail {
 }
 
 interface ShapBarChartProps {
-  // add props and types
   shapData: ShapDetail[];
 }
 

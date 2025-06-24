@@ -108,7 +108,6 @@ function PredictionModule () {
   }
   
   return (
-    // <div className="w-full mx-auto px-4 sm:px-6 lg:px-8 bg-gray-100 py-8">
     <div className="px-4 sm:px-6 lg:px-8 bg-gray-100 py-8 rounded-xl">
       <div className="flex items-center justify-center mb-4">
         <h1 className="text-3xl font-bold text-gray-800 text-center">Recovery Score Predictor</h1>

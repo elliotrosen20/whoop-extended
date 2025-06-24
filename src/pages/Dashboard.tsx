@@ -37,10 +37,6 @@ function Dashboard() {
     }
   }, [fileId, insightsReady, navigate])
 
-  // if (!fileId || !insightsReady) {
-  //   console.log('Missing fileId or insights not ready, redirecting to upload page');
-  //   return <Navigate to="/upload" replace />;
-  // }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -83,7 +79,6 @@ function Dashboard() {
         } catch (err) {
           console.error("Error parsing shapData:", err);
           setShapData([]);
-          // setHasError(true);
           hasAnyError = true;
         }
 
@@ -129,7 +124,6 @@ function Dashboard() {
           loading={isLoading}
           size={35}
         />
-        {/* <span>Populating dashboard...</span> */}
       </div>
     )
   }
@@ -141,7 +135,6 @@ function Dashboard() {
   }
 
   return (
-    // <div className="w-full px-4 sm:px-6 lg:px-8 max-w-full mx-auto">
     <div className="">
       <div className="mb-6">
         <h1 className="text-4xl font-bold text-gray-800 text-center">Whoop Extended</h1>

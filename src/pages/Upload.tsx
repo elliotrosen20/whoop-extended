@@ -139,7 +139,6 @@ function Upload() {
         throw new Error(res.error)
       }
 
-      // process response
 
       localStorage.setItem('insightsReady', 'true');
       navigate('/dashboard');
@@ -193,7 +192,6 @@ function Upload() {
       </div>
 
       {fileId && localStorage.getItem('insightsReady') === 'true' ? (
-        // User has already generated insights
         <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 text-center">
           <h2 className="text-xl font-semibold mb-3">You've already analyzed a file.</h2>
           <p className="mb-6">Your insights are ready to view in the dashboard.</p>
@@ -233,7 +231,6 @@ function Upload() {
             type="file"
             onChange={handleFileChange}
             ref={fileInputRef}
-            // className='block'
             className='block text-sm text-gray-500
                       file:mr-4 file:py-2 file:px-4
                       file:rounded file:border-0

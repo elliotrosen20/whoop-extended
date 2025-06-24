@@ -10,7 +10,6 @@ interface ShapDetail {
 }
 
 interface ShapWaterfallChartProps {
-  // add props and types
   shapData: ShapDetail[];
 }
 
