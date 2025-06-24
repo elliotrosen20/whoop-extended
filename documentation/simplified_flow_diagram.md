@@ -16,15 +16,6 @@ graph TD
     J --> H
 
     %% Styling to differentiate Frontend and Backend steps
-    style A fill:#e1f5fe,stroke:#333,stroke-width:2px
-    style C fill:#e1f5fe,stroke:#333,stroke-width:2px
-    style F fill:#e1f5fe,stroke:#333,stroke-width:2px
-    style H fill:#e8f5e8,stroke:#333,stroke-width:2px
-    style I fill:#e1f5fe,stroke:#333,stroke-width:2px
-
-    style B fill:#fff3e0,stroke:#333,stroke-width:2px
-    style D fill:#fff3e0,stroke:#333,stroke-width:2px
-    style E fill:#fff3e0,stroke:#333,stroke-width:2px
-    style G fill:#fff3e0,stroke:#333,stroke-width:2px
-    style J fill:#fff3e0,stroke:#333,stroke-width:2px
-```
+    %% Uniform styling
+    classDef whiteBox fill:#ffffff,stroke:#000,stroke-width:2px,color:#000;
+    class A,B,C,D,E,F,G,H,I,J whiteBox;
