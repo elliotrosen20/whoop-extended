@@ -101,7 +101,7 @@ function PredictionModule () {
       }
 
     } catch (error) {
-      console.error('Error making prediciton:', error)
+      console.error('Error making prediction:', error)
     } finally {
       setLoading(false)
     }
