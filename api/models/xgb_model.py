@@ -45,17 +45,17 @@ def train_xgboost_kfold_early_stop(X, y, n_splits=5, RANDOM_STATE=42):
 
 UPLOAD_FOLDER = 'uploads'
 
-def train_model(file_id):
-    filename = f"{file_id}.csv"
-    filepath = os.path.join(UPLOAD_FOLDER, filename)
+# def train_model(file_id):
+#     filename = f"{file_id}.csv"
+#     filepath = os.path.join(UPLOAD_FOLDER, filename)
     
-    df = pd.read_csv(filepath)
-    df_clean = preprocess_data(df)
+#     df = pd.read_csv(filepath)
+#     df_clean = preprocess_data(df)
     
-    X, y = model_prep(df_clean)
-    xgb_model = train_xgboost_kfold_early_stop(X, y)
+#     X, y = model_prep(df_clean)
+#     xgb_model = train_xgboost_kfold_early_stop(X, y)
 
-    return xgb_model
+#     return xgb_model
 
 def train_model(df_clean):    
     X, y = model_prep(df_clean)
