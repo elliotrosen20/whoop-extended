@@ -84,11 +84,11 @@ graph TD
 
     subgraph "Your Production Backend"
         C["API Server (Flask)<br/>Receives request with JWT"] -->|Verifies JWT with Clerk| B
-        C -->|1. On Upload| D["Amazon S3<br/>Persistent File Storage"]
-        C -->|2. Check for results| E["Redis Cache<br/>Fast, expiring cache"]
+        C -->|On Upload| D["Amazon S3<br/>Persistent File Storage"]
+        C -->|Check for results| E["Redis Cache<br/>Fast, expiring cache"]
         E -->|Cache Miss| C
-        C -->|3. Get File for Analysis| D
-        C -->|4. Store results| E
+        C -->|Get File for Analysis| D
+        C -->|Store results| E
         C -->|Stores/Checks Ownership| F["PostgreSQL DB<br/>Source of Truth for<br/>(user_id, file_id, s3_path)"]
     end
     
