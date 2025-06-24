@@ -59,7 +59,6 @@ function Dashboard() {
         } catch (err) {
           console.error("Error parsing insights", err);
           setInsights([]);
-          // setHasError(true);
           hasAnyError = true;
         }
 
@@ -69,7 +68,6 @@ function Dashboard() {
         } catch (err) {
           console.error("Error parsing eqInsights:", err)
           setEqInsights([]);
-          // setHasError(true);
           hasAnyError = true;
         }
 
