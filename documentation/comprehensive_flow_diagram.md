@@ -128,6 +128,9 @@ graph TB
     style XX fill:#f3e5f5
     style YY fill:#f3e5f5
     style FFF fill:#c8e6c9
+    %% Uniform styling
+    classDef whiteBox fill:#ffffff,stroke:#000,stroke-width:2px,color:#000;
+    class A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,AA,BB,CC,DD,EE,FF,GG,HH,II,JJ,KK,LL,MM,NN,OO,PP,QQ,RR,SS,TT,UU,VV,WW,XX,YY,ZZ,AAA,BBB,CCC,DDD,EEE,FFF,GGG,HHH whiteBox;
 ```
 
 ## System Architecture Overview
